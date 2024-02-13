@@ -1,16 +1,7 @@
 import { Layout } from 'antd';
-import AppHeader from "./components/layout/AppHeader.jsx";
+import AppHeader from "./components/Layout/AppHeader.jsx";
 import AppSider from "./components/Sider/AppSider.jsx";
-
-
-
-const contentStyle = {
-    textAlign: 'center',
-    minHeight: 'calc(100vh - 60px)',
-    color: '#fff',
-    backgroundColor: '#001529',
-};
-
+import AppContent from "./components/Content/AppContent.jsx";
 
 
 
@@ -20,7 +11,7 @@ export default function App(){
             <AppHeader/>
             <Layout>
                 <AppSider/>
-                <Layout.Content style={contentStyle}>Content</Layout.Content>
+                <AppContent/>
             </Layout>
         </Layout>
     )
