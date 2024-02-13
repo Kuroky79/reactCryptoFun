@@ -1,7 +1,8 @@
-import {Layout, Card, Statistic,List,Typography} from "antd";
+import {Layout, Card, Statistic,List,Spin,Typography} from "antd";
 import { ArrowDownOutlined, ArrowUpOutlined } from '@ant-design/icons';
 import {useEffect, useState} from "react";
 import {cryptoAssets, cryptoData} from "../../data/data.js";
+import {fakeFetchAssets, fakeFetchCrypto} from "../../data/api.js";
 const siderStyle = {
     padding: '1rem',
 
@@ -21,10 +22,18 @@ export default function AppSider(){
     useEffect(() => {
         async function preload(){
             setLoading(true);
-            const {result} = await cryptoData();
-            const assets = await cryptoAssets();
+            const {result} = await fakeFetchCrypto();
+            const assets = await fakeFetchAssets();
+            setCrypto(result);
+            setAssets(assets);
+            setLoading(false);
         }
+        preload();
     }, []);
+
+    if (loading){
+        return <Spin fullscreen/>
+    }
     return (<Layout.Sider width="25%" style={siderStyle}>
         <Card bordered={false} style={{marginBottom: 10}}>
             <Statistic
