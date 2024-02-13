@@ -1,13 +1,8 @@
 import { Layout } from 'antd';
+import AppHeader from "./components/layout/AppHeader.jsx";
+import AppSider from "./components/Sider/AppSider.jsx";
 
-const headerStyle = {
-    textAlign: 'center',
-    color: '#fff',
-    height: 60,
-    paddingInline: 48,
-    lineHeight: '64px',
-    backgroundColor: '#4096ff',
-};
+
 
 const contentStyle = {
     textAlign: 'center',
@@ -16,23 +11,15 @@ const contentStyle = {
     backgroundColor: '#001529',
 };
 
-const siderStyle = {
-    textAlign: 'center',
-    lineHeight: '120px',
-    color: '#fff',
-    backgroundColor: '#1677ff',
-};
 
 
 
 export default function App(){
     return (
         <Layout>
-            <Layout.Header style={headerStyle}>Header</Layout.Header>
+            <AppHeader/>
             <Layout>
-                <Layout.Sider width="25%" style={siderStyle}>
-                    Sider
-                </Layout.Sider>
+                <AppSider/>
                 <Layout.Content style={contentStyle}>Content</Layout.Content>
             </Layout>
         </Layout>
