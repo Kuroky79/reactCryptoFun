@@ -3,14 +3,20 @@ import {Flex, Select, Space, Typography, Button, Divider, Form, Checkbox, Input,
 import {useCrypto} from "../context/crypto-context.jsx";
 import {DatePicker} from "antd/lib";
 
-const onFinish = (values) => {
+function onFinish(values)  {
     console.log('Success:', values);
-};
+}
+
 
 export default function AddAssetsForm(){
+    const [form] = Form.useForm();
     const {crypto} = useCrypto();
     const [coin, setCoin] = useState(null);
-
+    function handleAmountChange(value){
+        form.setFieldsValue({
+            total: value * coin.price,
+        })
+    }
 
     if (!coin){
         return (
@@ -32,11 +38,14 @@ export default function AddAssetsForm(){
     }else{
         return (
             <Form
+                form={form}
                 name="basic"
                 labelCol={{ span: 4 }}
                 wrapperCol={{ span: 10 }}
                 style={{ maxWidth: 600 }}
-                // initialValues={}
+                initialValues={{
+                    price: +(coin.price.toFixed(2)),
+                }}
                 onFinish={onFinish}
             >
                 <Flex style={{alignItems: 'center'}}>
@@ -55,7 +64,7 @@ export default function AddAssetsForm(){
                         },
                     ]}
                 >
-                    <InputNumber style={{width: '100%', marginLeft: 20}}/>
+                    <InputNumber placeholder="Enter coin amount" onChange={handleAmountChange} style={{width: '100%', marginLeft: 20}}/>
                 </Form.Item>
 
                 <Form.Item
