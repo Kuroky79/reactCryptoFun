@@ -1,6 +1,7 @@
 import {useState} from "react";
 import {Flex, Select, Space, Typography, Button, Divider, Form, Checkbox, Input, InputNumber} from "antd";
 import {useCrypto} from "../context/crypto-context.jsx";
+import {DatePicker} from "antd/lib";
 
 const onFinish = (values) => {
     console.log('Success:', values);
@@ -61,7 +62,19 @@ export default function AddAssetsForm(){
                     label="Price"
                     name="price"
                 >
-                    <InputNumber style={{width: '100%', marginLeft: 20}}/>
+                    <InputNumber disabled style={{width: '100%', marginLeft: 20}}/>
+                </Form.Item>
+                <Form.Item
+                    label="Date && Time"
+                    name="dateTime"
+                >
+                    <DatePicker showTime style={{width: '100%', marginLeft: 20}}/>
+                </Form.Item>
+                <Form.Item
+                    label="Total"
+                    name="total"
+                >
+                    <InputNumber disabled style={{width: '100%', marginLeft: 20}}/>
                 </Form.Item>
                 <Form.Item>
                     <Button type="primary" htmlType="submit">
