@@ -66,7 +66,7 @@ export default function AppHeader(){
                 <CryptoInfoModal coin={coin}/>
             </Modal>
             <Drawer title="Add Drawer" destroyOnClose onClose={()=>setDrawer(false)} open={drawer} style={{width: 600}}>
-                <AddAssetsForm/>
+                <AddAssetsForm onClose={()=>setDrawer(false)}/>
             </Drawer>
         </Layout.Header>)
 }

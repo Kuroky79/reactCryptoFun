@@ -1,26 +1,52 @@
 import {useState} from "react";
-import {Flex, Select, Space, Typography, Button, Divider, Form, Checkbox, Input, InputNumber} from "antd";
+import {Flex,Result, Select, Space, Typography, Button, Divider, Form, Checkbox, Input, InputNumber} from "antd";
 import {useCrypto} from "../context/crypto-context.jsx";
 import {DatePicker} from "antd/lib";
+import CoinInfo from "../Modal/CoinInfo.jsx";
 
-function onFinish(values)  {
-    console.log('Success:', values);
-}
 
 
 export default function AddAssetsForm(){
     const [form] = Form.useForm();
     const {crypto} = useCrypto();
     const [coin, setCoin] = useState(null);
-    function handleAmountChange(value){
-        form.setFieldsValue({
-            total: value * coin.price,
-        })
+    const [submitted, setSubmitted] = useState(false);
+
+
+    if (submitted){
+        return (
+            <Result
+                style={{display: "flex",alignItems: 'center',flexDirection: 'column', marginRight: 190 }}
+                status="success"
+                title="New Asset Added"
+                subTitle={`Added ${42} of ${coin.name} by price ${24}`}
+                extra={[
+                    <Button type="primary" key="console" >
+                        Close
+                    </Button>,
+                ]}
+            />
+        )
+    }
+    function onFinish(values)  {
+        console.log('Success:', values);
+        setSubmitted(true);
     }
 
+    function handleAmountChange(value){
+        form.setFieldsValue({
+            total: +(value * coin.price).toFixed(2),
+        })
+    }
+    function handlePriceChange(value){
+        const amount = form.getFieldValue('amount');
+        form.setFieldsValue({
+            total: +(amount * coin.price).toFixed(2),
+        })
+    }
     if (!coin){
         return (
-            <Select style={{width: '100%'}}
+            <Select style={{width: '60%'}}
                 onSelect={(v)=> setCoin(crypto.find((c) => c.id === v))}
                 placeholder="Select Coin"
                 options={crypto.map(coin => ({
@@ -48,10 +74,7 @@ export default function AddAssetsForm(){
                 }}
                 onFinish={onFinish}
             >
-                <Flex style={{alignItems: 'center'}}>
-                    <img src={coin.icon} alt={coin.name} style={{width: 40}}/>
-                    <Typography.Title level={2} style={{margin: 0, marginLeft: 15}}> {coin.name}</Typography.Title>
-                </Flex>
+                <CoinInfo coin={coin}/>
                 <Divider/>
                 <Form.Item
                     label="Amount"
@@ -71,7 +94,7 @@ export default function AddAssetsForm(){
                     label="Price"
                     name="price"
                 >
-                    <InputNumber disabled style={{width: '100%', marginLeft: 20}}/>
+                    <InputNumber onChange={handlePriceChange}  style={{width: '100%', marginLeft: 20}}/>
                 </Form.Item>
                 <Form.Item
                     label="Date && Time"
