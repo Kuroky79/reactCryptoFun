@@ -22,11 +22,11 @@ export default function CryptoInfoModal({coin}){
             </Typography.Paragraph>
             <Typography.Paragraph>
                 <Typography.Text strong>Price: </Typography.Text>
-                <Tag>{(coin.price).toFixed(2)}$</Tag>
+                <Tag>{(coin.price).toFixed(4)}$</Tag>
             </Typography.Paragraph>
             <Typography.Paragraph>
                 <Typography.Text strong>Price BTC: </Typography.Text>
-                <Tag>{coin.priceBtc.toFixed(2)}$</Tag>
+                <Tag>{coin.priceBtc.toFixed(5)}$</Tag>
             </Typography.Paragraph>
             <Typography.Paragraph>
                 <Typography.Text strong>Market Cap: </Typography.Text>
