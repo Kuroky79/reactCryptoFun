@@ -29,5 +29,5 @@ export default function AssetsTable(){
         price: a.price,
         amount: a.amount,
     }))
-    return <div style={{position: 'absolute',bottom: 0,width: '100%'}}><Table pagination={false} columns={columns} dataSource={data} />;</div>
+    return <div style={{position: 'fixed',bottom: 0,width: '100%'}}><Table pagination={false} columns={columns} dataSource={data} />;</div>
 }
