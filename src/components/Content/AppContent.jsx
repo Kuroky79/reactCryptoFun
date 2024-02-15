@@ -1,5 +1,7 @@
 import {Layout, Typography} from "antd";
 import {useCrypto} from "../context/crypto-context.jsx";
+import PortfolioChart from "./PortfolioChart.jsx";
+import AssetsTable from "./AssetsTable.jsx";
 const contentStyle = {
     textAlign: 'center',
     minHeight: 'calc(100vh - 60px)',
@@ -18,5 +20,7 @@ export default function AppContent(){
             })
                 .reduce((acc,value)=> (acc+=value),0).toFixed(3)}$
             </Typography.Title>
+            <PortfolioChart/>
+            <AssetsTable/>
         </Layout.Content>)
 }
